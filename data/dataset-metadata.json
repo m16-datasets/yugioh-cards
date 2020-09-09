@@ -1,0 +1,22 @@
+{
+    "id": "ioexception/yugioh-cards",
+    "title": "Yu-Gi-Oh! Cards",
+    "subtitle": "All the Yu-Gi-Oh! cards available at https://ygoprodeck.com/",
+    "description":"The literal and graphical information presented on this dataset Yu-Gi-Oh!, including card images, the attribute, level/rank and type symbols, and card text, is copyright 4K Media Inc, a subsidiary of Konami Digital Entertainment, Inc.",
+    "keywords": [
+        "games",
+        "board games",
+        "card games",
+        "anime and manga"
+    ],
+    "licenses": [],
+    "resources": [
+      {
+        "path": "cards.csv",
+        "description": "All the cards dataset",
+        "schema": {
+          "fields": []
+        }
+      }
+    ]
+  }
