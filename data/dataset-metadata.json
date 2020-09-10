@@ -1,22 +1,113 @@
 {
-    "id": "ioexception/yugioh-cards",
-    "title": "Yu-Gi-Oh! Cards",
-    "subtitle": "All the Yu-Gi-Oh! cards available at https://ygoprodeck.com/",
-    "description":"The literal and graphical information presented on this dataset Yu-Gi-Oh!, including card images, the attribute, level/rank and type symbols, and card text, is copyright 4K Media Inc, a subsidiary of Konami Digital Entertainment, Inc.",
-    "keywords": [
-        "games",
-        "board games",
-        "card games",
-        "anime and manga"
-    ],
-    "licenses": [],
-    "resources": [
-      {
+  "id":"ioexception/yugioh-cards",
+  "title":"Yu-Gi-Oh! Cards",
+  "subtitle":"All the Yu-Gi-Oh! cards available at https://ygoprodeck.com/",
+  "description":"All the cards from your popular trading card game Yu-Gi-Oh.\n\nInformation downloaded from https://ygoprodeck.com/ via its API.\n\nThe literal and graphical information presented on this dataset Yu-Gi-Oh!, including card images, the attribute, level/rank and type symbols, and card text, is copyright of 4K Media Inc, a subsidiary of Konami Digital Entertainment, Inc.",
+  "keywords":[
+     "arts and entertainment",
+     "games",
+     "board games",
+     "card games",
+     "anime and manga"
+  ],
+  "resources":[
+     {
         "path": "cards.csv",
-        "description": "All the cards dataset",
+        "description": "The main file of this dataset, it contains all the information related to the cards",
         "schema": {
-          "fields": []
+           "fields": [
+              {
+                 "name":"id",
+                 "title":"ID or Passocde of the card.",
+                 "type":"Uuid"
+              },
+              {
+                 "name":"name",
+                 "title":"Name of the card.",
+                 "type":"String"
+              },
+              {
+                 "name":"type",
+                 "title":"The type of card you are viewing (Normal Monster, Effect Monster, Synchro Monster, Spell Card, Trap Card, etc).",
+                 "type":"String"
+              },
+              {
+                 "name":"desc",
+                 "title":"Card description/effect.",
+                 "type":"String"
+              },
+              {
+                 "name":"atk",
+                 "title":"The ATK value of the card.",
+                 "type":"Number"
+              },
+              {
+                 "name":"def",
+                 "title":"The DEF value of the card.",
+                 "type":"Number"
+              },
+              {
+                 "name":"level",
+                 "title":"The Level/RANK of the card.",
+                 "type":"Number"
+              },
+              {
+                 "name":"race",
+                 "title":"The card race which is officially called type (Spellcaster, Warrior, Insect, etc).",
+                 "type":"String"
+              },
+              {
+                 "name":"attribute",
+                 "title":"The attribute of the card.",
+                 "type":"String"
+              },
+              {
+                 "name":"scale",
+                 "title":"The Pendulum Scale Value.",
+                 "type":"Uuid"
+              },
+              {
+                 "name":"archetype",
+                 "title":"The Archetype that the card belongs to.",
+                 "type":"String"
+              },
+              {
+                 "name":"linkval",
+                 "title":"The Link Value of the card if it's of type \"Link Monster\".",
+                 "type":"String"
+              },
+              {
+                 "name":"linkmarkers",
+                 "title":"The Link Markers of the card if it's of type \"Link Monster\". This information is stored as an array.",
+                 "type":"String"
+              },
+              {
+                 "name":"image_url",
+                 "title":"The main artwork image.",
+                 "type":"uri"
+              },
+              {
+                 "name":"image_url_small",
+                 "title":"The main artwork image in a smaller version.",
+                 "type":"uri"
+              },
+              {
+                 "name":"ban_tcg",
+                 "title":"The status of the card on the TCG Ban List.",
+                 "type":"String"
+              },
+              {
+                 "name":"ban_ocg",
+                 "title":"The status of the card on the OCG Ban List.",
+                 "type":"String"
+              },
+              {
+                 "name":"ban_goat",
+                 "title":"The status of the card on the GOAT Format Ban List.",
+                 "type":"String"
+              }
+           ]
         }
-      }
-    ]
-  }
+     }
+  ]
+}
