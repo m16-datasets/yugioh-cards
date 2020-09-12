@@ -3,6 +3,8 @@ import json
 import pandas as pd
 import requests
 from kaggle import api
+import click
+import logging
 
 column_order = [
     "id",
@@ -25,6 +27,15 @@ column_order = [
     "ban_goat",
 ]
 
+
+def setup_logger(log_file):
+    logger = logging.getLogger("yugioh")
+    f_handler = logging.FileHandler(log_file)
+    logger.setLevel(logging.INFO)
+    f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    f_handler.setFormatter(f_format)
+    logger.addHandler(f_handler)
+    return logger 
 
 def get_card_list():
     all_cards_response = requests.get("https://db.ygoprodeck.com/api/v7/cardinfo.php")
@@ -50,7 +61,11 @@ def prepare_for_dataframe(card):
     return card
 
 
-def main():
+@click.command()
+@click.argument("log_file", type=click.Path(dir_okay=False))
+def main(log_file):
+    logger = setup_logger(log_file)
+    logger.info("starting execution")
     card_list = get_card_list()
     cards_clean = [prepare_for_dataframe(card) for card in card_list]
     cards_df = pd.DataFrame(cards_clean)
