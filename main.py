@@ -29,7 +29,7 @@ column_order = [
 
 
 def setup_logger(log_file):
-    logger = logging.getLogger("yugioh")
+    logger = logging.getLogger("yugioh_cards")
     f_handler = logging.FileHandler(log_file)
     logger.setLevel(logging.INFO)
     f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -60,6 +60,17 @@ def prepare_for_dataframe(card):
 
     return card
 
+def find_variants(card_list):
+    related = list()
+    for card in card_list:
+        parent_id = card["id"]
+        for img in card.get("card_images", list()):
+            if parent_id != img["id"]:
+                related.append({"variant":img["id"], "parent":parent_id})
+
+    return related
+
+
 
 @click.command()
 @click.argument("log_file", type=click.Path(dir_okay=False))
@@ -67,13 +78,15 @@ def main(log_file):
     logger = setup_logger(log_file)
     logger.info("starting execution")
     card_list = get_card_list()
+    variants_df = pd.DataFrame(find_variants(card_list))
     cards_clean = [prepare_for_dataframe(card) for card in card_list]
     cards_df = pd.DataFrame(cards_clean)
 
     assert set(cards_df.columns) == set(column_order)
 
     cards_df[column_order].to_csv("data/cards.csv", index=False)
-    api.dataset_create_version("data", "Weekly dataset update", quiet=True)
+    variants_df.to_csv("data/variants.csv", index=False)
+    api.dataset_create_version("data", "Add variants update", quiet=True)
 
 
 if __name__ == "__main__":
